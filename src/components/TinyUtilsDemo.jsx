@@ -354,6 +354,118 @@ function TinyUtilsDemo() {
           )}
         </div>
       </div>
+
+      <div className="demo-section">
+        <h3>💡 Real-World Use Cases</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>🛒 E-commerce: Process Orders</h4>
+            <div className="code-result" style={{ fontSize: '12px', marginTop: '10px' }}>
+              {`// Group orders by status
+const orders = [
+  { id: 1, status: 'pending', total: 100 },
+  { id: 2, status: 'shipped', total: 200 }
+]
+groupBy(orders, o => o.status)
+// { pending: [...], shipped: [...] }`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📊 Analytics: Unique Visitors</h4>
+            <div className="code-result" style={{ fontSize: '12px', marginTop: '10px' }}>
+              {`// Remove duplicate user IDs
+const visitors = [1, 2, 2, 3, 3, 3, 4]
+uniq(visitors) // [1, 2, 3, 4]`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔍 Search: Debounce Input</h4>
+            <div className="code-result" style={{ fontSize: '12px', marginTop: '10px' }}>
+              {`// Wait 500ms after user stops typing
+const search = debounce((query) => {
+  api.search(query)
+}, 500)`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔄 State: Clean Form Data</h4>
+            <div className="code-result" style={{ fontSize: '12px', marginTop: '10px' }}>
+              {`// Remove empty fields before submit
+const cleanData = removeEmptyValues(formData)
+// Only sends fields with values`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🌐 API: Parse URL Params</h4>
+            <div className="code-result" style={{ fontSize: '12px', marginTop: '10px' }}>
+              {`// ?page=1&limit=10 → { page: '1', limit: '10' }
+const params = parseQueryString(location.search)
+const page = params.page`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>💾 Data: Safe Deep Clone</h4>
+            <div className="code-result" style={{ fontSize: '12px', marginTop: '10px' }}>
+              {`// Clone before modifying
+const cloned = deepClone(original)
+cloned.nested.value = 'new'
+// original unchanged`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Common Patterns & Examples</h3>
+        
+        <div className="code-block">
+          <div className="code-label">Pattern: Process API Response</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Clean and process API data
+const rawData = {
+  name: 'John',
+  email: '',
+  age: null,
+  tags: [],
+  active: true
+}
+
+// Step 1: Remove empty values
+const cleaned = removeEmptyValues(rawData)
+// { name: 'John', active: true }
+
+// Step 2: Pick only needed fields
+const user = pick(cleaned, ['name', 'active'])
+// { name: 'John', active: true }`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: Pagination with Chunk</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Split items into pages
+const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+const pages = chunk(items, 3)
+// [[1,2,3], [4,5,6], [7,8,9], [10]]
+
+// Get page 2
+const page2 = pages[1] // [4, 5, 6]`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: Safe Nested Access</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Instead of: user?.address?.city || 'Unknown'
+const city = get(user, 'address.city', 'Unknown')
+// Safe access with default
+
+// Update nested value
+const updated = set(user, 'address.city', 'NYC')
+// { ...user, address: { ...user.address, city: 'NYC' } }`}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

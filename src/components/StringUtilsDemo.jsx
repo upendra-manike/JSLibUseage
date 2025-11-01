@@ -110,15 +110,130 @@ Bob,35,Chicago`)
       </div>
 
       <div className="demo-section">
+        <h3>💡 Real-World Examples</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>🌐 Generate URLs</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Convert title to URL slug
+const title = "Hello World Example"
+const slug = slugify(title)
+// "hello-world-example"
+
+const url = \`/blog/\${slug}\`
+// "/blog/hello-world-example"`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🏷️ CSS Classes</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Convert to CSS-friendly class names
+const className = kebabCase("UserProfileCard")
+// "user-profile-card"
+
+// Or camelCase for JS
+const jsName = camelCase("user profile card")
+// "userProfileCard"`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📄 Display Truncated Text</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Truncate long descriptions
+const description = "Very long text..."
+const preview = truncate(description, 100)
+// "Very long text..." (if > 100 chars)
+
+// In React
+<p>{truncate(post.content, 150)}</p>`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📊 Import/Export CSV Data</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Import CSV to process
+const csvData = "name,age\\nJohn,30\\nJane,25"
+const users = csvToArray(csvData)
+
+// Export data as CSV
+const csv = arrayToCsv(users)
+// Download as file`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Common Patterns</h3>
+        <div className="code-block">
+          <div className="code-label">Pattern: Generate URL Slugs</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Convert titles to SEO-friendly URLs
+function createPostUrl(title) {
+  const slug = slugify(title)
+  return \`/blog/\${slug}\`
+}
+
+createPostUrl("My Awesome Post!")
+// "/blog/my-awesome-post"
+
+// Store in database
+const post = {
+  id: uuid(),
+  title: "My Awesome Post!",
+  slug: slugify(title),
+  url: createPostUrl(title)
+}`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: Convert API Keys</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Convert API response keys to camelCase
+function normalizeKeys(data) {
+  return Object.keys(data).reduce((obj, key) => {
+    obj[camelCase(key)] = data[key]
+    return obj
+  }, {})
+}
+
+// API returns: { user_name: 'John', user_email: '...' }
+// Convert to: { userName: 'John', userEmail: '...' }`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: Export Data to CSV</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Export table data
+function exportToCSV(data, filename) {
+  const csv = arrayToCsv(data)
+  const blob = new Blob([csv], { type: 'text/csv' })
+  const url = URL.createObjectURL(blob)
+  
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  a.click()
+}
+
+// Usage
+exportToCSV(users, 'users.csv')`}
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
         <h3>Features Demonstrated</h3>
         <ul style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
-          <li>✅ Case conversion (camelCase, snake_case, kebab-case, PascalCase)</li>
-          <li>✅ Slugify for URL-friendly strings</li>
-          <li>✅ Truncate with ellipsis</li>
-          <li>✅ Capitalize words</li>
-          <li>✅ CSV to array conversion</li>
-          <li>✅ Array to CSV conversion</li>
-          <li>✅ Remove BOM and normalize line endings</li>
+          <li>✅ Case conversion - camelCase, snake_case, kebab-case, PascalCase</li>
+          <li>✅ Slugify for URL-friendly strings - SEO-friendly URLs</li>
+          <li>✅ Truncate with ellipsis - Display previews</li>
+          <li>✅ Capitalize words - Proper formatting</li>
+          <li>✅ CSV to array conversion - Import spreadsheet data</li>
+          <li>✅ Array to CSV conversion - Export data</li>
+          <li>✅ Remove BOM and normalize line endings - Clean text processing</li>
         </ul>
       </div>
     </div>

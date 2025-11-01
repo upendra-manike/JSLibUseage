@@ -107,13 +107,118 @@ function ValidatorsDemo() {
       </div>
 
       <div className="demo-section">
+        <h3>📋 Additional Validators</h3>
+        <div className="info-grid">
+          <div className="info-item">
+            <span className="label">isArray([1,2,3]):</span>
+            <span className="value">{isArray([1,2,3]) ? 'true ✅' : 'false ❌'}</span>
+          </div>
+          <div className="info-item">
+            <span className="label">isArray('not array'):</span>
+            <span className="value">{isArray('not array') ? 'true ✅' : 'false ❌'}</span>
+          </div>
+          <div className="info-item">
+            <span className="label">isDate(new Date()):</span>
+            <span className="value">{isDate(new Date()) ? 'true ✅' : 'false ❌'}</span>
+          </div>
+          <div className="info-item">
+            <span className="label">isPlainObject({}):</span>
+            <span className="value">{isPlainObject({}) ? 'true ✅' : 'false ❌'}</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>💡 Real-World Use Cases</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>📝 Form Validation</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Before form submit
+if (!isEmail(formData.email)) {
+  error = 'Invalid email'
+}
+if (isEmpty(formData.name)) {
+  error = 'Name required'
+}`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔗 URL Input Validation</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Validate user-provided URLs
+if (isUrl(userInput)) {
+  window.open(userInput)
+} else {
+  showError('Invalid URL')
+}`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📱 Phone Number Check</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Verify phone format
+if (isPhone(phoneNumber)) {
+  sendSMS(phoneNumber)
+} else {
+  showError('Invalid phone number')
+}`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🧹 Data Sanitization</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Clean data before saving
+const clean = Object.entries(data)
+  .filter(([key, value]) => !isEmpty(value))
+  .reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {})`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Validation Patterns</h3>
+        <div className="code-block">
+          <div className="code-label">Complete Form Validation Example:</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`function validateForm(data) {
+  const errors = {}
+  
+  if (isEmpty(data.name)) {
+    errors.name = 'Name is required'
+  }
+  
+  if (!isEmail(data.email)) {
+    errors.email = 'Invalid email format'
+  }
+  
+  if (!isUrl(data.website)) {
+    errors.website = 'Invalid website URL'
+  }
+  
+  if (data.phone && !isPhone(data.phone)) {
+    errors.phone = 'Invalid phone number'
+  }
+  
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors
+  }
+}`}
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
         <h3>Features Demonstrated</h3>
         <ul style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
-          <li>✅ Email validation</li>
-          <li>✅ URL validation</li>
-          <li>✅ Phone number validation</li>
-          <li>✅ Empty value checks (null, undefined, empty string, array, object)</li>
-          <li>✅ Type checks and runtime detection</li>
+          <li>✅ Email validation - Perfect for forms</li>
+          <li>✅ URL validation - Validate user-provided links</li>
+          <li>✅ Phone number validation - Format checking</li>
+          <li>✅ Empty value checks - Data sanitization</li>
+          <li>✅ Type checks - Runtime type detection</li>
+          <li>✅ Runtime detection - Browser/Node/WebWorker checks</li>
           <li>✅ Real-time validation feedback</li>
         </ul>
       </div>

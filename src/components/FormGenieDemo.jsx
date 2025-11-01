@@ -106,13 +106,113 @@ function FormGenieDemo() {
       )}
 
       <div className="demo-section">
+        <h3>💡 More Form Examples</h3>
+        <div className="code-block">
+          <div className="code-label">Complex Form Schema Example:</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`const complexSchema = [
+  {
+    name: 'email',
+    type: 'email',
+    label: 'Email',
+    required: true,
+    placeholder: 'user@example.com'
+  },
+  {
+    name: 'age',
+    type: 'number',
+    label: 'Age',
+    required: false,
+    min: 18,
+    max: 100
+  },
+  {
+    name: 'country',
+    type: 'select',
+    label: 'Country',
+    required: true,
+    options: [
+      { value: 'us', label: 'United States' },
+      { value: 'uk', label: 'United Kingdom' }
+    ]
+  },
+  {
+    name: 'subscribe',
+    type: 'checkbox',
+    label: 'Subscribe to newsletter',
+    default: true
+  },
+  {
+    name: 'bio',
+    type: 'textarea',
+    label: 'Biography',
+    rows: 5,
+    maxLength: 500
+  }
+]`}
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Use Cases</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>📝 User Registration</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Auto-generate signup form
+const signupSchema = [
+  { name: 'username', type: 'text', required: true },
+  { name: 'email', type: 'email', required: true },
+  { name: 'password', type: 'password', required: true }
+]
+
+<FormGenie schema={signupSchema} onSubmit={handleSignup} />`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📋 Survey Forms</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Dynamic survey from API
+const surveySchema = await fetch('/api/survey-schema')
+  .then(r => r.json())
+
+<FormGenie schema={surveySchema} onSubmit={submitSurvey} />`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>⚙️ Settings Form</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Generate settings from config
+const settingsSchema = [
+  { name: 'theme', type: 'select', options: [...] },
+  { name: 'notifications', type: 'checkbox' }
+]`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔍 Search Filters</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Build filter form dynamically
+const filterSchema = [
+  { name: 'category', type: 'select', options: categories },
+  { name: 'priceRange', type: 'number' }
+]`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
         <h3>Features Demonstrated</h3>
         <ul style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
-          <li>✅ Schema-based form generation</li>
-          <li>✅ Automatic validation</li>
-          <li>✅ Support for text, email, number, select, textarea, checkbox</li>
-          <li>✅ Required field validation</li>
-          <li>✅ Customizable field components</li>
+          <li>✅ Schema-based form generation - Define once, render everywhere</li>
+          <li>✅ Automatic validation - Built-in email, required, min/max checks</li>
+          <li>✅ Support for all input types - text, email, number, select, textarea, checkbox, radio</li>
+          <li>✅ Required field validation - Visual feedback</li>
+          <li>✅ Customizable field components - Override default rendering</li>
+          <li>✅ Conditional fields - Show/hide based on values</li>
+          <li>✅ Default values - Pre-fill forms</li>
         </ul>
       </div>
     </div>

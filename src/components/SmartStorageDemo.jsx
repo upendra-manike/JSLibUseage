@@ -115,6 +115,101 @@ function SmartStorageDemo() {
       </div>
 
       <div className="demo-section">
+        <h3>💡 Real-World Examples</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>🛒 Shopping Cart</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Save cart with 24h expiration
+await store.set('cart', cartItems, 86400000)
+
+// Load cart
+const savedCart = await store.get('cart')
+// Auto-expires after 24 hours`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔐 Session Data</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Store user session (1 hour)
+await store.set('session', {
+  userId: 123,
+  token: '...'
+}, 3600000)
+
+// Auto-logout after 1 hour`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📊 Cache API Responses</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Cache expensive API call
+const data = await api.get('/heavy-endpoint')
+await store.set('api-cache', data, 600000)
+
+// Use cached data
+const cached = await store.get('api-cache')
+if (cached) return cached`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>💾 User Preferences</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Save settings (no expiration)
+await store.set('preferences', {
+  theme: 'dark',
+  language: 'en'
+})
+
+// Load preferences
+const prefs = await store.get('preferences')`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Common Patterns</h3>
+        <div className="code-block">
+          <div className="code-label">Pattern: Cache with Auto-Refresh</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Smart caching pattern
+async function getCachedData(key) {
+  // Check cache first
+  const cached = await store.get(key)
+  if (cached) {
+    return cached // Fast return
+  }
+  
+  // Fetch fresh data
+  const fresh = await fetchData()
+  await store.set(key, fresh, 600000) // 10 min TTL
+  return fresh
+}
+
+// Usage
+const data = await getCachedData('user-profile')`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: Multi-Storage Strategy</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Use different storage types
+const localStorage = createStorage({ type: 'localStorage' })
+const sessionStorage = createStorage({ type: 'sessionStorage' })
+
+// Persistent data
+await localStorage.set('user', userData)
+
+// Session-only data
+await sessionStorage.set('temp', tempData)
+// Cleared on tab close`}
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
         <h3>Features Demonstrated</h3>
         <ul style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
           <li>✅ <strong>Store with TTL in localStorage</strong> - Automatic expiration with Time To Live</li>
@@ -122,8 +217,8 @@ function SmartStorageDemo() {
           <li>✅ TTL (Time To Live) support - Data expires automatically after specified time</li>
           <li>✅ JSON safe handling - Automatic serialization/deserialization</li>
           <li>✅ Works in Browser, Node.js, and React Native</li>
-          <li>✅ Prefix support for namespacing</li>
-          <li>✅ Automatic expiration handling</li>
+          <li>✅ Prefix support for namespacing - Avoid key conflicts</li>
+          <li>✅ Automatic expiration handling - No manual cleanup needed</li>
         </ul>
       </div>
     </div>

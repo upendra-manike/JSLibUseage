@@ -96,21 +96,93 @@ function SmartDateDemo() {
       </div>
 
       <div className="demo-section">
-        <h3>Time Examples</h3>
+        <h3>📅 Real-World Date Examples</h3>
         <div className="examples">
           {[
-            new Date(Date.now() - 5000), // 5 seconds ago
-            new Date(Date.now() - 60000), // 1 minute ago
-            new Date(Date.now() - 3600000), // 1 hour ago
-            new Date(Date.now() - 86400000), // yesterday
-            new Date(Date.now() + 3600000), // 1 hour from now
-          ].map((date, idx) => (
+            { date: new Date(Date.now() - 5000), label: '5 seconds ago' },
+            { date: new Date(Date.now() - 30000), label: '30 seconds ago' },
+            { date: new Date(Date.now() - 60000), label: '1 minute ago' },
+            { date: new Date(Date.now() - 300000), label: '5 minutes ago' },
+            { date: new Date(Date.now() - 3600000), label: '1 hour ago' },
+            { date: new Date(Date.now() - 86400000), label: 'Yesterday' },
+            { date: new Date(Date.now() - 172800000), label: '2 days ago' },
+            { date: new Date(Date.now() - 604800000), label: 'Last week' },
+            { date: new Date(Date.now() + 3600000), label: '1 hour from now' },
+            { date: new Date(Date.now() + 86400000), label: 'Tomorrow' },
+          ].map((item, idx) => (
             <div key={idx} className="example-item">
-              <span>{new SmartDate(date).format('YYYY-MM-DD HH:mm:ss')}</span>
+              <span style={{ fontWeight: '600', color: '#666' }}>{item.label}:</span>
+              <span>{new SmartDate(item.date).format('YYYY-MM-DD HH:mm:ss')}</span>
               <span className="arrow">→</span>
-              <span className="relative">{new SmartDate(date).fromNow()}</span>
+              <span className="relative">{new SmartDate(item.date).fromNow()}</span>
             </div>
           ))}
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>💡 Use Cases</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>📱 Social Media Posts</h4>
+            <div className="result-box">
+              "Posted {new SmartDate(Date.now() - 7200000).fromNow()}"
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📧 Email Timestamps</h4>
+            <div className="result-box">
+              "Received {new SmartDate(Date.now() - 3600000).fromNow()}"
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📝 Comment Dates</h4>
+            <div className="result-box">
+              "Commented {new SmartDate(Date.now() - 86400000).fromNow()}"
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🗓️ Event Countdown</h4>
+            <div className="result-box">
+              "Event starts {new SmartDate(Date.now() + 259200000).fromNow({ showFuture: true })}"
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="demo-section">
+        <h3>🎯 Common Patterns</h3>
+        <div className="code-block">
+          <div className="code-label">Display relative time in UI:</div>
+          <div className="code-result">
+            {`const date = new SmartDate(new Date('2024-01-01'))
+date.fromNow() // "2 months ago"
+
+// With options
+date.fromNow({ showSeconds: true }) // "2 months ago"
+date.fromNow({ showFuture: true }) // Shows "in 2 hours" for future dates`}
+          </div>
+        </div>
+        <div className="code-block">
+          <div className="code-label">Format dates for display:</div>
+          <div className="code-result">
+            {`date.format() // Default format
+date.format('YYYY-MM-DD') // "2024-01-01"
+date.format('MM/DD/YYYY') // "01/01/2024"
+date.format('DD MMM YYYY') // "01 Jan 2024"`}
+          </div>
+        </div>
+        <div className="code-block">
+          <div className="code-label">Check date conditions:</div>
+          <div className="code-result">
+            {`const today = new SmartDate()
+today.isToday() // true
+today.isTomorrow() // false
+
+// Check past/future
+const pastDate = new SmartDate('2023-01-01')
+pastDate.isPast() // true
+pastDate.isFuture() // false`}
+          </div>
         </div>
       </div>
     </div>

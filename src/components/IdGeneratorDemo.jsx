@@ -112,13 +112,98 @@ function IdGeneratorDemo() {
       </div>
 
       <div className="demo-section">
+        <h3>💡 Real-World Examples</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>🗄️ Database Records</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Generate unique ID for new record
+const newUser = {
+  id: uuid(), // "550e8400-e29b-41d4-a716-446655440000"
+  name: 'John',
+  createdAt: new Date()
+}`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔗 Short URLs</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Create short link ID
+const shortId = shortId(8) // "aB3xK9mP"
+const shortUrl = \`https://example.com/\${shortId}\`
+// Store mapping: shortId → fullUrl`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔐 Hash for Cache Keys</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Hash query params for cache
+const cacheKey = hash(\`users?page=1&limit=10\`)
+// "abc123xyz" - consistent hash
+localStorage.setItem(cacheKey, data)`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔒 Mask Sensitive Data</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Display partial email/phone
+const displayEmail = mask(email, 4)
+// "jo***@example.com"
+
+const displayPhone = mask(phone, 3)
+// "+12***7890"`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Common Patterns</h3>
+        <div className="code-block">
+          <div className="code-label">Pattern: Generate IDs for Items</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Generate IDs for new items
+const createItem = (name) => ({
+  id: uuid(), // Unique identifier
+  shortId: shortId(6), // Short ID for URLs
+  name,
+  createdAt: Date.now()
+})
+
+// Use in React
+const newItem = createItem('Todo Item')
+setItems([...items, newItem])`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: Privacy-Friendly Display</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Show masked data in UI
+function UserCard({ email, phone }) {
+  return (
+    <div>
+      <p>Email: {mask(email, 4)}</p>
+      <p>Phone: {mask(phone, 3)}</p>
+    </div>
+  )
+}
+
+// Original: john.doe@example.com
+// Displayed: john***@example.com`}
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
         <h3>Use Cases</h3>
         <ul style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
           <li>✅ Generate unique identifiers for database records</li>
           <li>✅ Create short IDs for URLs (like bit.ly)</li>
-          <li>✅ Hash strings for simple checksums</li>
-          <li>✅ Mask sensitive data (emails, phones, credit cards)</li>
+          <li>✅ Hash strings for simple checksums and cache keys</li>
+          <li>✅ Mask sensitive data (emails, phones, credit cards) for privacy</li>
           <li>✅ Cryptographically secure random generation</li>
+          <li>✅ Generate session IDs, transaction IDs, order numbers</li>
         </ul>
       </div>
     </div>

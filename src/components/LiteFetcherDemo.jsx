@@ -95,13 +95,104 @@ function LiteFetcherDemo() {
       </div>
 
       <div className="demo-section">
+        <h3>💡 Real-World Use Cases</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>📱 Mobile App: Cache API Data</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Cache user profile for 5 minutes
+const profile = await api.get('/user/profile', {
+  cache: { ttl: 300000 }
+})
+
+// Subsequent requests use cache
+// Reduces API calls & improves performance`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🛒 E-commerce: Product List</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Cache products for 10 minutes
+const products = await api.get('/products', {
+  cache: { ttl: 600000, storage: 'sessionStorage' }
+})
+
+// Fast page loads, reduced server load`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📊 Dashboard: Auto Refresh</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Show cached data immediately
+const data = await api.get('/dashboard', {
+  cache: { ttl: 60000 }
+})
+
+if (data.cached) {
+  // Show instant, then refresh in background
+}`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Common Patterns</h3>
+        <div className="code-block">
+          <div className="code-label">Pattern: Create API Client with Base URL</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`import { createApi } from '@upendra.manike/lite-fetcher'
+
+const api = createApi({
+  baseURL: 'https://api.example.com/v1',
+  headers: {
+    'Authorization': 'Bearer token',
+    'Content-Type': 'application/json'
+  },
+  timeout: 5000
+})
+
+// All requests use base URL
+const users = await api.get('/users')
+// → https://api.example.com/v1/users`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: React Hook with Caching</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`function useUsers() {
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    api.get('/users', { cache: { ttl: 60000 } })
+      .then(response => {
+        setUsers(response.data)
+        setLoading(false)
+      })
+      .catch(error => {
+        console.error(error)
+        setLoading(false)
+      })
+  }, [])
+
+  return { users, loading }
+}`}
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
         <h3>Features Demonstrated</h3>
         <ul style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
-          <li>✅ GET requests with fetch API</li>
-          <li>✅ Built-in caching with localStorage</li>
-          <li>✅ TTL (Time To Live) support</li>
-          <li>✅ Cache status indicator</li>
-          <li>✅ Error handling</li>
+          <li>✅ GET/POST/PUT/DELETE requests with fetch API</li>
+          <li>✅ Built-in caching with localStorage/sessionStorage</li>
+          <li>✅ TTL (Time To Live) support - Auto expiration</li>
+          <li>✅ Cache status indicator - Know when data is cached</li>
+          <li>✅ Error handling - Graceful failure</li>
+          <li>✅ Base URL configuration - Centralized API setup</li>
+          <li>✅ Custom headers - Authentication, content-type</li>
         </ul>
       </div>
     </div>

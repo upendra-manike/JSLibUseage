@@ -115,13 +115,115 @@ function ReactMotionKitDemo() {
       </AnimatedModal>
 
       <div className="demo-section">
+        <h3>💡 Real-World Examples</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>🎨 Interactive UI Elements</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Add animations to buttons
+<AnimatedButton 
+  variant="bounce"
+  onClick={handleClick}
+>
+  Submit
+</AnimatedButton>
+
+// Creates engaging, interactive UI`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📱 Modal Dialogs</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Animated modal with smooth enter/exit
+<AnimatedModal
+  isOpen={isOpen}
+  onClose={handleClose}
+  variant="scale"
+>
+  <Content />
+</AnimatedModal>
+
+// Better UX than instant show/hide`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🎭 Page Transitions</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Animate content appearing
+<motion.div {...fade}>
+  <PageContent />
+</motion.div>
+
+// Smooth page loads`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔔 Notification Alerts</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Animated toast notifications
+<motion.div {...slide}>
+  <Notification message="Success!" />
+</motion.div>
+
+// Draws attention gracefully`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Common Patterns</h3>
+        <div className="code-block">
+          <div className="code-label">Pattern: Animated Card List</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Animate list items
+function ProductList({ products }) {
+  return (
+    <div>
+      {products.map((product, index) => (
+        <motion.div
+          key={product.id}
+          {...fadeIn}
+          transition={{ delay: index * 0.1 }}
+        >
+          <ProductCard product={product} />
+        </motion.div>
+      ))}
+    </div>
+  )
+}
+
+// Staggered animations for visual appeal`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: Loading States</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Animated loading spinner
+<motion.div {...pulse}>
+  <Spinner />
+</motion.div>
+
+// Or loading skeleton
+<motion.div {...fadeIn}>
+  <Skeleton />
+</motion.div>
+
+// Better than static loading`}
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
         <h3>Features Demonstrated</h3>
         <ul style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
-          <li>✅ Prebuilt animation hooks (fade, slide, bounce, scale, etc.)</li>
-          <li>✅ Easy-to-use API with sensible defaults</li>
-          <li>✅ Customizable duration, delay, and easing</li>
-          <li>✅ Pre-animated components (Button, Modal)</li>
-          <li>✅ Built on Framer Motion for smooth animations</li>
+          <li>✅ Prebuilt animation hooks - fade, slide, bounce, scale, rotate, shake, pulse, hover</li>
+          <li>✅ Easy-to-use API with sensible defaults - Works out of the box</li>
+          <li>✅ Customizable duration, delay, and easing - Full control when needed</li>
+          <li>✅ Pre-animated components - AnimatedButton and AnimatedModal ready to use</li>
+          <li>✅ Built on Framer Motion - Smooth, performant animations</li>
+          <li>✅ React hooks pattern - Integrates seamlessly with React</li>
         </ul>
       </div>
     </div>

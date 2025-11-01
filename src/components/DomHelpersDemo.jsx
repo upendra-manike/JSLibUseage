@@ -115,13 +115,123 @@ function DomHelpersDemo() {
       </div>
 
       <div className="demo-section">
+        <h3>💡 Real-World Examples</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>📋 Copy to Clipboard</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Copy invite link, code, etc.
+async function handleCopy(inviteCode) {
+  const success = await copyToClipboard(inviteCode)
+  if (success) {
+    showToast('Copied to clipboard!')
+  }
+}
+
+// Usage
+<button onClick={() => handleCopy('ABC123')}>
+  Copy Invite Code
+</button>`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>👁️ Lazy Load Images</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Load image when in viewport
+useEffect(() => {
+  const observer = new IntersectionObserver((entries) => {
+    if (isInViewport(imageRef.current)) {
+      setImageSrc(imageSrc)
+      observer.disconnect()
+    }
+  })
+  observer.observe(imageRef.current)
+}, [])`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📜 Smooth Navigation</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Smooth scroll to section
+function scrollToSection(id) {
+  smoothScrollTo(\`#\${id}\`)
+}
+
+// In navigation
+<a onClick={() => scrollToSection('about')}>
+  About
+</a>`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>📊 Scroll Tracking</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Track if element is visible
+const checkVisibility = throttle(() => {
+  if (isInViewport(adElement)) {
+    trackImpression()
+  }
+}, 1000)
+
+window.addEventListener('scroll', checkVisibility)`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Common Patterns</h3>
+        <div className="code-block">
+          <div className="code-label">Pattern: Copy Share Link</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Share functionality
+async function shareLink(url) {
+  if (navigator.share) {
+    await navigator.share({ url })
+  } else {
+    // Fallback: copy to clipboard
+    await copyToClipboard(url)
+    alert('Link copied to clipboard!')
+  }
+}
+
+// Usage
+<button onClick={() => shareLink(currentUrl)}>
+  Share
+</button>`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: Table of Contents Navigation</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Smooth scroll to headings
+function TableOfContents({ headings }) {
+  return (
+    <nav>
+      {headings.map(heading => (
+        <a
+          key={heading.id}
+          onClick={() => smoothScrollTo(\`#\${heading.id}\`)}
+        >
+          {heading.title}
+        </a>
+      ))}
+    </nav>
+  )
+}`}
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
         <h3>Features Demonstrated</h3>
         <ul style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
-          <li>✅ Copy text to clipboard with fallback support</li>
-          <li>✅ Detect if element is in viewport</li>
-          <li>✅ Smooth scroll to elements</li>
-          <li>✅ Debounce/throttle (also available in this package)</li>
-          <li>✅ Browser-compatible utilities</li>
+          <li>✅ Copy text to clipboard with fallback support - Cross-browser compatible</li>
+          <li>✅ Detect if element is in viewport - Lazy loading, analytics</li>
+          <li>✅ Smooth scroll to elements - Better UX for navigation</li>
+          <li>✅ Debounce/throttle - Optimize scroll/resize handlers</li>
+          <li>✅ Browser-compatible utilities - Works everywhere</li>
         </ul>
       </div>
     </div>

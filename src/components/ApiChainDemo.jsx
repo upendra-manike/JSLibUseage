@@ -95,13 +95,115 @@ function ApiChainDemo() {
       </div>
 
       <div className="demo-section">
+        <h3>💡 Real-World Use Cases</h3>
+        <div className="use-cases">
+          <div className="use-case-item">
+            <h4>📊 Dashboard Data Loading</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Load all dashboard data sequentially
+chain
+  .step(() => fetchUser())
+  .step((user) => fetchUserStats(user.id))
+  .step((data) => fetchRecentActivity(data.userId))
+  .execute()`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🛒 Order Processing</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Create order workflow
+chain
+  .step(() => validateCart())
+  .step((cart) => calculateTotal(cart))
+  .step((order) => processPayment(order))
+  .step((order) => createShipment(order))
+  .execute()`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>👤 User Onboarding</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Multi-step setup
+chain
+  .step(() => createAccount(data))
+  .step((user) => sendWelcomeEmail(user))
+  .step((user) => setupDefaultPreferences(user))
+  .execute()`}
+            </div>
+          </div>
+          <div className="use-case-item">
+            <h4>🔄 Data Sync</h4>
+            <div className="result-box" style={{ fontSize: '13px' }}>
+              {`// Sync data across services
+chain
+  .step(() => fetchLocalData())
+  .step((local) => syncWithServer(local))
+  .step((server) => updateLocalCache(server))
+  .execute()`}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
+        <h3>🎯 Common Patterns</h3>
+        <div className="code-block">
+          <div className="code-label">Pattern: Error Handling in Chain</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Handle errors gracefully
+const chain = createChain({
+  onError: (error, step) => {
+    console.error(\`Step \${step} failed:\`, error)
+    // Optionally continue or stop
+  },
+  stopOnError: true // Stop on first error
+})
+
+chain
+  .step(() => fetchUser())
+  .step((user) => fetchPosts(user.id))
+  .run()
+
+// Result includes success flag and error info`}
+          </div>
+        </div>
+
+        <div className="code-block" style={{ marginTop: '15px' }}>
+          <div className="code-label">Pattern: Transform Data Between Steps</div>
+          <div className="code-result" style={{ fontSize: '12px' }}>
+            {`// Transform and pass data
+chain
+  .step(async () => {
+    const raw = await fetch('/api/users')
+    return raw.json()
+  })
+  .step(async (users) => {
+    // Transform users
+    return users.map(u => ({
+      id: u.id,
+      displayName: \`\${u.firstName} \${u.lastName}\`
+    }))
+  })
+  .step(async (transformed) => {
+    // Use transformed data
+    return saveToCache(transformed)
+  })
+  .runData()`}
+          </div>
+        </div>
+      </div>
+
+      <div className="demo-section">
         <h3>How It Works</h3>
         <ol style={{ lineHeight: '1.8', paddingLeft: '20px' }}>
           <li>Step 1: Fetches user data from API</li>
-          <li>Step 2: Uses user ID to fetch user's posts</li>
-          <li>Step 3: Uses first post ID to fetch comments</li>
-          <li>Final result contains user, posts, and comments</li>
+          <li>Step 2: Uses user ID from step 1 to fetch user's posts</li>
+          <li>Step 3: Uses first post ID from step 2 to fetch comments</li>
+          <li>Final result contains user, posts, and comments - All in one call!</li>
         </ol>
+        <p style={{ marginTop: '15px', padding: '15px', background: '#f0f9ff', borderRadius: '8px', color: '#0369a1' }}>
+          <strong>💡 Benefit:</strong> Each step uses the result of the previous step, making complex workflows simple and readable.
+        </p>
       </div>
     </div>
   )
