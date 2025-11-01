@@ -14,7 +14,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@upendra.manike/ai-mini": "^1.0.0",
     "@upendra.manike/api-chain": "^1.0.0",
     "@upendra.manike/array-helpers": "^1.0.0",
     "@upendra.manike/cacheable-fetch": "^1.0.0",

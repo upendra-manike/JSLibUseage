@@ -10,7 +10,6 @@ import SmartStorageDemo from './components/SmartStorageDemo'
 import ApiChainDemo from './components/ApiChainDemo'
 import FormGenieDemo from './components/FormGenieDemo'
 import ReactMotionKitDemo from './components/ReactMotionKitDemo'
-import AiMiniDemo from './components/AiMiniDemo'
 import ValidatorsDemo from './components/ValidatorsDemo'
 import IdGeneratorDemo from './components/IdGeneratorDemo'
 import DomHelpersDemo from './components/DomHelpersDemo'
@@ -40,7 +39,6 @@ function App() {
     { id: 'api-chain', name: 'API Chain', component: ApiChainDemo },
     { id: 'form-genie', name: 'Form Genie', component: FormGenieDemo },
     { id: 'react-motion-kit', name: 'React Motion Kit', component: ReactMotionKitDemo },
-    { id: 'ai-mini', name: 'AI Mini', component: AiMiniDemo },
   ]
 
   const ActiveComponent = activeDemo ? demos.find(d => d.id === activeDemo)?.component : null
