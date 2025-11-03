@@ -128,6 +128,23 @@
     </style>
 </head>
 <body>
+    <!-- Example Modal -->
+    <div id="exampleModal" style="display:none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+      <div style="background: white; max-width: 720px; width: 92%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); overflow: hidden;">
+        <div style="padding: 14px 16px; border-bottom: 1px solid #e5e7eb; display:flex; align-items:center; justify-content: space-between;">
+          <div id="exampleTitle" style="font-weight:600; color:#111827; font-size: 16px;">Example</div>
+          <button id="closeExampleBtn" class="btn btn-secondary" style="padding:6px 10px">Close</button>
+        </div>
+        <div style="padding: 16px;">
+          <pre id="exampleCode" style="white-space: pre-wrap; background:#0f172a; color:#e2e8f0; padding: 14px; border-radius:8px; font-size: 12px; line-height: 1.5; overflow:auto;">
+          </pre>
+          <div style="display:flex; gap:8px; margin-top: 12px;">
+            <button id="copyExampleBtn" class="btn btn-secondary">Copy code</button>
+            <a id="openDemoLink" class="btn btn-primary" target="_blank" rel="noreferrer" style="display:none">Open demo ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
     <header>
         <h1>🚀 JSLib</h1>
         <p class="subtitle">22 Modern JavaScript/TypeScript Libraries</p>
@@ -368,11 +385,13 @@ const { time } = await measureTime(async () => {});`
             }
         ];
 
+        const downloadCounts = {};
+
         function renderPackages(filteredPackages) {
             const grid = document.getElementById('packagesGrid');
             grid.innerHTML = filteredPackages.map(pkg => `
                 <div class="package-card" data-category="${pkg.category}">
-                    <div class="package-name">${pkg.name}</div>
+                    <div class="package-name">${pkg.name}${typeof downloadCounts[pkg.name] === 'number' ? ` (${downloadCounts[pkg.name].toLocaleString()})` : ''}</div>
                     <div class="package-description">${pkg.description}</div>
                     <div class="package-keywords">
                         ${pkg.keywords.slice(0, 4).map(k => `<span class="keyword">${k}</span>`).join('')}
@@ -404,8 +423,70 @@ const { time } = await measureTime(async () => {});`
             renderPackages(filtered);
         }
 
+        // Map npm package to demo id in app (for opening focused demo windows)
+        const demoMap = {
+          '@upendra.manike/smart-date': 'smart-date',
+          '@upendra.manike/tiny-utils': 'tiny-utils',
+          '@upendra.manike/validators': 'validators',
+          '@upendra.manike/id-generator': 'id-generator',
+          '@upendra.manike/string-utils': 'string-utils',
+          '@upendra.manike/array-helpers': 'array-helpers',
+          '@upendra.manike/object-helpers': 'object-helpers',
+          '@upendra.manike/dom-helpers': 'dom-helpers',
+          '@upendra.manike/motion-kit': 'motion-kit',
+          '@upendra.manike/react-skeletons': 'react-skeletons',
+          '@upendra.manike/react-motion-kit': 'react-motion-kit',
+          '@upendra.manike/lite-fetcher': 'lite-fetcher',
+          '@upendra.manike/fetch-plus': 'fetch-plus',
+          '@upendra.manike/cacheable-fetch': 'cacheable-fetch',
+          '@upendra.manike/smart-storage': 'smart-storage',
+          '@upendra.manike/api-chain': 'api-chain',
+          '@upendra.manike/form-genie': 'form-genie',
+        }
+
         function showExample(name, code) {
-            alert(`${name}\n\nExample:\n${code}`);
+            const modal = document.getElementById('exampleModal');
+            const title = document.getElementById('exampleTitle');
+            const pre = document.getElementById('exampleCode');
+            const copyBtn = document.getElementById('copyExampleBtn');
+            const closeBtn = document.getElementById('closeExampleBtn');
+            const openDemo = document.getElementById('openDemoLink');
+
+            title.textContent = name;
+            pre.textContent = `Example:\n${code}`;
+
+            // Setup copy handler
+            copyBtn.onclick = async () => {
+              try {
+                await navigator.clipboard.writeText(code);
+                copyBtn.textContent = 'Copied!';
+                setTimeout(() => (copyBtn.textContent = 'Copy code'), 1200);
+              } catch (_) {
+                // fallback: select text
+                const r = document.createRange();
+                r.selectNode(pre);
+                const sel = window.getSelection();
+                sel.removeAllRanges();
+                sel.addRange(r);
+                try { document.execCommand('copy'); } catch (_) {}
+                sel.removeAllRanges();
+              }
+            }
+
+            // Setup open demo link if mapped
+            const demoId = demoMap[name];
+            if (demoId) {
+              const base = location.origin + location.pathname;
+              openDemo.href = `${base}?demo=${demoId}&solo=1`;
+              openDemo.style.display = 'inline-block';
+            } else {
+              openDemo.style.display = 'none';
+            }
+
+            // Open/close modal
+            modal.style.display = 'flex';
+            closeBtn.onclick = () => (modal.style.display = 'none');
+            modal.onclick = (e) => { if (e.target === modal) modal.style.display = 'none' }
         }
 
         // Event listeners
@@ -418,8 +499,28 @@ const { time } = await measureTime(async () => {});`
             });
         });
 
-        // Initial render
+        async function fetchDownloadCounts() {
+          try {
+            const results = await Promise.all(packages.map(async (pkg) => {
+              const encoded = encodeURIComponent(pkg.name);
+              const res = await fetch(`https://api.npmjs.org/downloads/point/last-month/${encoded}`);
+              if (!res.ok) return { name: pkg.name, downloads: null };
+              const json = await res.json();
+              return { name: pkg.name, downloads: json.downloads || 0 };
+            }));
+            results.forEach(({ name, downloads }) => {
+              if (typeof downloads === 'number') downloadCounts[name] = downloads;
+            });
+            // Re-render with counts
+            filterPackages();
+          } catch (e) {
+            // Ignore errors; UI will just omit counts
+          }
+        }
+
+        // Initial render and async counts fetch
         renderPackages(packages);
+        fetchDownloadCounts();
     </script>
 </body>
 </html>
