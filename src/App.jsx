@@ -20,6 +20,9 @@ import DownloadsStats from './components/DownloadsStats'
 import AsyncUtilsDemo from './components/AsyncUtilsDemo'
 import DeepAccessDemo from './components/DeepAccessDemo'
 import ReactSafeEffectsDemo from './components/ReactSafeEffectsDemo'
+import PreciseMathDemo from './components/PreciseMathDemo'
+import EventManagerDemo from './components/EventManagerDemo'
+import ReactUtilsDemo from './components/ReactUtilsDemo'
 import './App.css'
 
 function App() {
@@ -51,6 +54,9 @@ function App() {
     { id: 'async-utils', name: 'Async Utils', component: AsyncUtilsDemo },
     { id: 'deep-access', name: 'Deep Access', component: DeepAccessDemo },
     { id: 'react-safe-effects', name: 'React Safe Effects', component: ReactSafeEffectsDemo },
+    { id: 'precise-math', name: 'Precise Math', component: PreciseMathDemo },
+    { id: 'event-manager', name: 'Event Manager', component: EventManagerDemo },
+    { id: 'react-utils', name: 'React Utils', component: ReactUtilsDemo },
     { id: 'downloads', name: 'NPM Downloads', component: DownloadsStats },
   ]
 

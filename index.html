@@ -147,7 +147,7 @@
     </div>
     <header>
         <h1>🚀 JSLib</h1>
-        <p class="subtitle">25 Modern JavaScript/TypeScript Libraries</p>
+        <p class="subtitle">28 Modern JavaScript/TypeScript Libraries</p>
         <p style="margin-top: 10px; opacity: 0.8;">Production-ready, lightweight, and well-documented</p>
     </header>
 
@@ -155,7 +155,7 @@
         <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search packages... (e.g., lodash alternative, axios replacement, react animations)">
 
         <div class="categories">
-            <button class="category-btn active" data-category="all">All (25)</button>
+            <button class="category-btn active" data-category="all">All (28)</button>
             <button class="category-btn" data-category="utilities">Utilities</button>
             <button class="category-btn" data-category="react">React</button>
             <button class="category-btn" data-category="api">API/Network</button>
@@ -414,6 +414,36 @@ useAsyncEffect(async () => {
   const data = await fetchData();
   setData(data);
 }, [deps]);`
+            },
+            {
+                name: '@upendra.manike/precise-math',
+                description: 'Decimal-safe math operations - Accurate add, sub, mul, div, round without floating-point errors.',
+                category: 'utilities',
+                keywords: ['math', 'decimal', 'precision', 'floating-point', 'accurate'],
+                install: 'npm install @upendra.manike/precise-math',
+                example: `import { add, mul, round } from '@upendra.manike/precise-math';
+add('0.1', '0.2'); // 0.3 (not 0.30000000000000004)
+mul('19.99', '2'); // 39.98`
+            },
+            {
+                name: '@upendra.manike/event-manager',
+                description: 'Safe event listener management - Automatic cleanup to prevent memory leaks. Type-safe event emitters.',
+                category: 'utilities',
+                keywords: ['event', 'listener', 'memory-leak', 'disposer', 'emitter'],
+                install: 'npm install @upendra.manike/event-manager',
+                example: `import { on, group, TypedEventEmitter } from '@upendra.manike/event-manager';
+const dispose = on(window, 'click', handler);
+dispose(); // Cleanup automatically`
+            },
+            {
+                name: '@upendra.manike/react-utils',
+                description: 'React utilities for common problems - hooks, state, performance, forms, async operations.',
+                category: 'react',
+                keywords: ['react', 'hooks', 'debounce', 'throttle', 'form', 'async'],
+                install: 'npm install @upendra.manike/react-utils',
+                example: `import { useDebounce, useForm, useAsync } from '@upendra.manike/react-utils';
+const debounced = useDebounce(value, 300);
+const form = useForm({ initialValues: {}, onSubmit: handleSubmit });`
             }
         ];
 
@@ -477,6 +507,9 @@ useAsyncEffect(async () => {
           '@upendra.manike/async-utils': 'async-utils',
           '@upendra.manike/deep-access': 'deep-access',
           '@upendra.manike/react-safe-effects': 'react-safe-effects',
+          '@upendra.manike/precise-math': 'precise-math',
+          '@upendra.manike/event-manager': 'event-manager',
+          '@upendra.manike/react-utils': 'react-utils',
         }
 
         function showExample(name, code) {
