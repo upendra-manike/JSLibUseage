@@ -17,6 +17,9 @@ import StringUtilsDemo from './components/StringUtilsDemo'
 import ArrayHelpersDemo from './components/ArrayHelpersDemo'
 import ObjectHelpersDemo from './components/ObjectHelpersDemo'
 import DownloadsStats from './components/DownloadsStats'
+import AsyncUtilsDemo from './components/AsyncUtilsDemo'
+import DeepAccessDemo from './components/DeepAccessDemo'
+import ReactSafeEffectsDemo from './components/ReactSafeEffectsDemo'
 import './App.css'
 
 function App() {
@@ -45,6 +48,9 @@ function App() {
     { id: 'api-chain', name: 'API Chain', component: ApiChainDemo },
     { id: 'form-genie', name: 'Form Genie', component: FormGenieDemo },
     { id: 'react-motion-kit', name: 'React Motion Kit', component: ReactMotionKitDemo },
+    { id: 'async-utils', name: 'Async Utils', component: AsyncUtilsDemo },
+    { id: 'deep-access', name: 'Deep Access', component: DeepAccessDemo },
+    { id: 'react-safe-effects', name: 'React Safe Effects', component: ReactSafeEffectsDemo },
     { id: 'downloads', name: 'NPM Downloads', component: DownloadsStats },
   ]
 
