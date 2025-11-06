@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="JSLib - Collection of 22 modern, production-ready JavaScript/TypeScript libraries. Utilities, date helpers, React components, API clients, and more.">
+    <meta name="description" content="JSLib - Collection of 25 modern, production-ready JavaScript/TypeScript libraries. Utilities, date helpers, React components, API clients, and more.">
     <meta name="keywords" content="javascript, typescript, npm packages, utilities, lodash alternative, axios alternative, react, animations, api client">
-    <title>JSLib - 22 Modern JavaScript Libraries | Usage Documentation</title>
+    <title>JSLib - 25 Modern JavaScript Libraries | Usage Documentation</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -147,7 +147,7 @@
     </div>
     <header>
         <h1>🚀 JSLib</h1>
-        <p class="subtitle">22 Modern JavaScript/TypeScript Libraries</p>
+        <p class="subtitle">25 Modern JavaScript/TypeScript Libraries</p>
         <p style="margin-top: 10px; opacity: 0.8;">Production-ready, lightweight, and well-documented</p>
     </header>
 
@@ -155,7 +155,7 @@
         <input type="text" id="searchBox" class="search-box" placeholder="🔍 Search packages... (e.g., lodash alternative, axios replacement, react animations)">
 
         <div class="categories">
-            <button class="category-btn active" data-category="all">All (22)</button>
+            <button class="category-btn active" data-category="all">All (25)</button>
             <button class="category-btn" data-category="utilities">Utilities</button>
             <button class="category-btn" data-category="react">React</button>
             <button class="category-btn" data-category="api">API/Network</button>
@@ -382,6 +382,38 @@ shortId(8); // 'aB3dE5fG'`
                 example: `import { logger, measureTime } from '@upendra.manike/dev-utils';
 const log = logger('MyApp');
 const { time } = await measureTime(async () => {});`
+            },
+            {
+                name: '@upendra.manike/async-utils',
+                description: 'Async control utilities - pMapSeries, withRetry (exponential backoff), sleep, timeout, signal-aware.',
+                category: 'utilities',
+                keywords: ['async', 'retry', 'backoff', 'promise', 'concurrency'],
+                install: 'npm install @upendra.manike/async-utils',
+                example: `import { withRetry, sleep, pMapSeries } from '@upendra.manike/async-utils';
+await withRetry(() => fetch('/api'), { maxRetries: 3 });
+await sleep(1000); // wait 1 second`
+            },
+            {
+                name: '@upendra.manike/deep-access',
+                description: 'Safe deep get/set with dotted paths and default values. Access nested object properties safely.',
+                category: 'utilities',
+                keywords: ['deep-get', 'deep-set', 'object', 'nested', 'optional-chaining'],
+                install: 'npm install @upendra.manike/deep-access',
+                example: `import { get, set } from '@upendra.manike/deep-access';
+get(obj, 'user.profile.name', 'Default');
+set(obj, 'user.profile.name', 'John');`
+            },
+            {
+                name: '@upendra.manike/react-safe-effects',
+                description: 'React hooks to avoid common pitfalls - safe async effects, stable callbacks, and cleanup.',
+                category: 'react',
+                keywords: ['react', 'hooks', 'useEffect', 'memory-leak', 'async'],
+                install: 'npm install @upendra.manike/react-safe-effects',
+                example: `import { useAsyncEffect } from '@upendra.manike/react-safe-effects';
+useAsyncEffect(async () => {
+  const data = await fetchData();
+  setData(data);
+}, [deps]);`
             }
         ];
 
@@ -442,6 +474,9 @@ const { time } = await measureTime(async () => {});`
           '@upendra.manike/smart-storage': 'smart-storage',
           '@upendra.manike/api-chain': 'api-chain',
           '@upendra.manike/form-genie': 'form-genie',
+          '@upendra.manike/async-utils': 'async-utils',
+          '@upendra.manike/deep-access': 'deep-access',
+          '@upendra.manike/react-safe-effects': 'react-safe-effects',
         }
 
         function showExample(name, code) {
