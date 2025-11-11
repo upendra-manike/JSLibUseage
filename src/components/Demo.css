@@ -413,3 +413,153 @@
   font-size: 1rem;
 }
 
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.example-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  border: 2px solid #e0e0e0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.example-card:hover {
+  border-color: #667eea;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.example-input {
+  margin-bottom: 10px;
+  color: #666;
+  font-size: 14px;
+}
+
+.example-output {
+  color: #667eea;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  background: #f8f9fa;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.commit-output {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 16px;
+  color: #333;
+  border-left: 4px solid #667eea;
+  margin: 10px 0;
+}
+
+.changelog-output {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  color: #333;
+  max-height: 500px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  margin: 10px 0;
+}
+
+.commits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.commit-item {
+  background: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.commit-types {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
+  margin: 15px 0;
+}
+
+.commit-type-item {
+  background: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+}
+
+.commit-type-item code {
+  background: #667eea;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.features-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 15px 0;
+}
+
+.feature-item {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  border-left: 4px solid #667eea;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.input-group .demo-input {
+  flex: 1;
+  min-width: 200px;
+  margin-bottom: 0;
+}
+
+.log-entry {
+  padding: 8px 12px;
+  border-radius: 4px;
+  margin: 5px 0;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+}
+
+.log-log {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.log-error {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.log-warn {
+  background: #fff3e0;
+  color: #e65100;
+}
+

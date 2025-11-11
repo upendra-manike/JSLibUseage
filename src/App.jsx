@@ -23,6 +23,9 @@ import ReactSafeEffectsDemo from './components/ReactSafeEffectsDemo'
 import PreciseMathDemo from './components/PreciseMathDemo'
 import EventManagerDemo from './components/EventManagerDemo'
 import ReactUtilsDemo from './components/ReactUtilsDemo'
+import DevUtilsDemo from './components/DevUtilsDemo'
+import CommitGenDemo from './components/CommitGenDemo'
+import ChangelogBuddyDemo from './components/ChangelogBuddyDemo'
 import './App.css'
 
 function App() {
@@ -57,6 +60,9 @@ function App() {
     { id: 'precise-math', name: 'Precise Math', component: PreciseMathDemo },
     { id: 'event-manager', name: 'Event Manager', component: EventManagerDemo },
     { id: 'react-utils', name: 'React Utils', component: ReactUtilsDemo },
+    { id: 'dev-utils', name: 'Dev Utils', component: DevUtilsDemo },
+    { id: 'commit-gen', name: 'Commit Gen', component: CommitGenDemo },
+    { id: 'changelog-buddy', name: 'Changelog Buddy', component: ChangelogBuddyDemo },
     { id: 'downloads', name: 'NPM Downloads', component: DownloadsStats },
   ]
 
