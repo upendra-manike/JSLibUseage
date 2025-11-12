@@ -36,6 +36,7 @@
     "@upendra.manike/react-safe-effects": "^1.0.1",
     "@upendra.manike/react-skeletons": "^1.0.4",
     "@upendra.manike/react-utils": "^0.1.1",
+    "@upendra.manike/seo-boost": "^0.1.0",
     "@upendra.manike/smart-date": "^1.0.7",
     "@upendra.manike/smart-storage": "^1.0.4",
     "@upendra.manike/string-utils": "^1.0.6",

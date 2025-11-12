@@ -26,6 +26,7 @@ import ReactUtilsDemo from './components/ReactUtilsDemo'
 import DevUtilsDemo from './components/DevUtilsDemo'
 import CommitGenDemo from './components/CommitGenDemo'
 import ChangelogBuddyDemo from './components/ChangelogBuddyDemo'
+import SeoBoostDemo from './components/SeoBoostDemo'
 import './App.css'
 
 function App() {
@@ -64,6 +65,7 @@ function App() {
     { id: 'dev-utils', name: 'Dev Utils', component: DevUtilsDemo, category: 'Development', description: 'Development and debugging utilities' },
     { id: 'commit-gen', name: 'Commit Gen', component: CommitGenDemo, category: 'Development', description: 'Generate conventional commit messages' },
     { id: 'changelog-buddy', name: 'Changelog Buddy', component: ChangelogBuddyDemo, category: 'Development', description: 'Generate changelogs from commits' },
+    { id: 'seo-boost', name: 'SEO Boost', component: SeoBoostDemo, category: 'SEO', description: 'Complete SEO optimization with meta tags, JSON-LD, and sitemaps' },
     { id: 'downloads', name: 'NPM Downloads', component: DownloadsStats, category: 'Stats', description: 'View NPM download statistics' },
   ]
 
