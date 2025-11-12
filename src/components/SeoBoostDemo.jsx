@@ -20,18 +20,21 @@ function SeoBoostDemo() {
   const [ogImage, setOgImage] = useState('https://example.com/og-image.jpg')
   const [seoAnalysis, setSeoAnalysis] = useState(null)
 
+  // Get current URL safely
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : 'https://myapp.com'
+
   // Use the React hook for SEO
   useSEO({
     title: metaTitle,
     description: metaDescription,
     keywords: ['SEO', 'React', 'Next.js', 'Meta Tags'],
-    canonical: window.location.href,
+    canonical: currentUrl,
     openGraph: {
       title: metaTitle,
       description: metaDescription,
       image: ogImage,
       type: 'website',
-      url: window.location.href,
+      url: currentUrl,
     },
     twitter: {
       card: 'summary_large_image',
