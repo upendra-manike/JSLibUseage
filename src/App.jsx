@@ -35,36 +35,60 @@ function App() {
   const isSoloMode = initialParams.get('solo') === '1'
 
   const [activeDemo, setActiveDemo] = useState(initialDemoFromUrl || null)
+  const [searchTerm, setSearchTerm] = useState('')
 
   const demos = [
-    { id: 'smart-date', name: 'Smart Date', component: SmartDateDemo },
-    { id: 'tiny-utils', name: 'Tiny Utils', component: TinyUtilsDemo },
-    { id: 'validators', name: 'Validators', component: ValidatorsDemo },
-    { id: 'id-generator', name: 'ID Generator', component: IdGeneratorDemo },
-    { id: 'string-utils', name: 'String Utils', component: StringUtilsDemo },
-    { id: 'array-helpers', name: 'Array Helpers', component: ArrayHelpersDemo },
-    { id: 'object-helpers', name: 'Object Helpers', component: ObjectHelpersDemo },
-    { id: 'dom-helpers', name: 'DOM Helpers', component: DomHelpersDemo },
-    { id: 'motion-kit', name: 'Motion Kit', component: MotionKitDemo },
-    { id: 'react-skeletons', name: 'React Skeletons', component: ReactSkeletonsDemo },
-    { id: 'lite-fetcher', name: 'Lite Fetcher', component: LiteFetcherDemo },
-    { id: 'fetch-plus', name: 'Fetch Plus', component: FetchPlusDemo },
-    { id: 'cacheable-fetch', name: 'Cacheable Fetch', component: CacheableFetchDemo },
-    { id: 'smart-storage', name: 'Smart Storage', component: SmartStorageDemo },
-    { id: 'api-chain', name: 'API Chain', component: ApiChainDemo },
-    { id: 'form-genie', name: 'Form Genie', component: FormGenieDemo },
-    { id: 'react-motion-kit', name: 'React Motion Kit', component: ReactMotionKitDemo },
-    { id: 'async-utils', name: 'Async Utils', component: AsyncUtilsDemo },
-    { id: 'deep-access', name: 'Deep Access', component: DeepAccessDemo },
-    { id: 'react-safe-effects', name: 'React Safe Effects', component: ReactSafeEffectsDemo },
-    { id: 'precise-math', name: 'Precise Math', component: PreciseMathDemo },
-    { id: 'event-manager', name: 'Event Manager', component: EventManagerDemo },
-    { id: 'react-utils', name: 'React Utils', component: ReactUtilsDemo },
-    { id: 'dev-utils', name: 'Dev Utils', component: DevUtilsDemo },
-    { id: 'commit-gen', name: 'Commit Gen', component: CommitGenDemo },
-    { id: 'changelog-buddy', name: 'Changelog Buddy', component: ChangelogBuddyDemo },
-    { id: 'downloads', name: 'NPM Downloads', component: DownloadsStats },
+    { id: 'smart-date', name: 'Smart Date', component: SmartDateDemo, category: 'Date & Time', description: 'Human-readable date formatting and relative time' },
+    { id: 'tiny-utils', name: 'Tiny Utils', component: TinyUtilsDemo, category: 'Utilities', description: 'Essential utility functions for arrays, objects, and strings' },
+    { id: 'validators', name: 'Validators', component: ValidatorsDemo, category: 'Validation', description: 'Input validation and data checking utilities' },
+    { id: 'id-generator', name: 'ID Generator', component: IdGeneratorDemo, category: 'Utilities', description: 'Generate unique IDs and identifiers' },
+    { id: 'string-utils', name: 'String Utils', component: StringUtilsDemo, category: 'Utilities', description: 'String manipulation and formatting helpers' },
+    { id: 'array-helpers', name: 'Array Helpers', component: ArrayHelpersDemo, category: 'Data', description: 'Powerful array manipulation utilities' },
+    { id: 'object-helpers', name: 'Object Helpers', component: ObjectHelpersDemo, category: 'Data', description: 'Object manipulation and transformation tools' },
+    { id: 'dom-helpers', name: 'DOM Helpers', component: DomHelpersDemo, category: 'DOM', description: 'DOM manipulation and query utilities' },
+    { id: 'motion-kit', name: 'Motion Kit', component: MotionKitDemo, category: 'Animation', description: 'CSS animation utilities and presets' },
+    { id: 'react-skeletons', name: 'React Skeletons', component: ReactSkeletonsDemo, category: 'React', description: 'Loading skeleton components for React' },
+    { id: 'lite-fetcher', name: 'Lite Fetcher', component: LiteFetcherDemo, category: 'Network', description: 'Lightweight fetch wrapper with utilities' },
+    { id: 'fetch-plus', name: 'Fetch Plus', component: FetchPlusDemo, category: 'Network', description: 'Enhanced fetch with retry and timeout' },
+    { id: 'cacheable-fetch', name: 'Cacheable Fetch', component: CacheableFetchDemo, category: 'Network', description: 'Fetch with built-in caching support' },
+    { id: 'smart-storage', name: 'Smart Storage', component: SmartStorageDemo, category: 'Storage', description: 'Enhanced localStorage and sessionStorage' },
+    { id: 'api-chain', name: 'API Chain', component: ApiChainDemo, category: 'Network', description: 'Chain API calls with error handling' },
+    { id: 'form-genie', name: 'Form Genie', component: FormGenieDemo, category: 'Forms', description: 'Form generation and validation utilities' },
+    { id: 'react-motion-kit', name: 'React Motion Kit', component: ReactMotionKitDemo, category: 'React', description: 'React animation components and hooks' },
+    { id: 'async-utils', name: 'Async Utils', component: AsyncUtilsDemo, category: 'Async', description: 'Async/await utilities and helpers' },
+    { id: 'deep-access', name: 'Deep Access', component: DeepAccessDemo, category: 'Data', description: 'Safe deep object property access' },
+    { id: 'react-safe-effects', name: 'React Safe Effects', component: ReactSafeEffectsDemo, category: 'React', description: 'Safe useEffect hooks and utilities' },
+    { id: 'precise-math', name: 'Precise Math', component: PreciseMathDemo, category: 'Math', description: 'Precision math operations for decimals' },
+    { id: 'event-manager', name: 'Event Manager', component: EventManagerDemo, category: 'Events', description: 'Event management and pub/sub system' },
+    { id: 'react-utils', name: 'React Utils', component: ReactUtilsDemo, category: 'React', description: 'Common React utility hooks and components' },
+    { id: 'dev-utils', name: 'Dev Utils', component: DevUtilsDemo, category: 'Development', description: 'Development and debugging utilities' },
+    { id: 'commit-gen', name: 'Commit Gen', component: CommitGenDemo, category: 'Development', description: 'Generate conventional commit messages' },
+    { id: 'changelog-buddy', name: 'Changelog Buddy', component: ChangelogBuddyDemo, category: 'Development', description: 'Generate changelogs from commits' },
+    { id: 'downloads', name: 'NPM Downloads', component: DownloadsStats, category: 'Stats', description: 'View NPM download statistics' },
   ]
+
+  // Filter demos based on search term
+  const filteredDemos = useMemo(() => {
+    if (!searchTerm.trim()) return demos
+    const term = searchTerm.toLowerCase()
+    return demos.filter(demo => 
+      demo.name.toLowerCase().includes(term) ||
+      demo.category.toLowerCase().includes(term) ||
+      demo.description.toLowerCase().includes(term)
+    )
+  }, [searchTerm, demos])
+
+  // Group demos by category
+  const demosByCategory = useMemo(() => {
+    const grouped = {}
+    filteredDemos.forEach(demo => {
+      if (!grouped[demo.category]) {
+        grouped[demo.category] = []
+      }
+      grouped[demo.category].push(demo)
+    })
+    return grouped
+  }, [filteredDemos])
 
   const ActiveComponent = activeDemo ? demos.find(d => d.id === activeDemo)?.component : null
 
@@ -94,29 +118,65 @@ function App() {
       {!isSoloMode && (
         <>
           <header className="app-header">
-            <h1>@upendra.manike Packages Demo</h1>
-            <p>Interactive demonstrations of all packages in real-time</p>
+            <h1>@upendra.manike Packages</h1>
+            <p>Interactive demonstrations and usage examples for all packages</p>
           </header>
 
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="🔍 Search packages by name, category, or description..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="search-input"
+            />
+            {searchTerm && (
+              <button 
+                className="clear-search"
+                onClick={() => setSearchTerm('')}
+                title="Clear search"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
           <nav className="demo-nav">
-            {demos.map(demo => (
-              <div key={demo.id} style={{ display: 'inline-flex', gap: 6 }}>
-                <button
-                  className={`demo-button ${activeDemo === demo.id ? 'active' : ''}`}
-                  onClick={() => setActiveDemo(activeDemo === demo.id ? null : demo.id)}
-                >
-                  {demo.name}
-                </button>
-                <button
-                  className="demo-button"
-                  title="Open in new window"
-                  onClick={() => openInNewWindow(demo.id)}
-                  style={{ padding: '8px 10px' }}
-                >
-                  ↗
+            {Object.keys(demosByCategory).length > 0 ? (
+              Object.entries(demosByCategory).map(([category, categoryDemos]) => (
+                <div key={category} className="category-section">
+                  <h3 className="category-title">{category}</h3>
+                  <div className="demo-buttons-grid">
+                    {categoryDemos.map(demo => (
+                      <div key={demo.id} className="demo-button-wrapper">
+                        <button
+                          className={`demo-button ${activeDemo === demo.id ? 'active' : ''}`}
+                          onClick={() => setActiveDemo(activeDemo === demo.id ? null : demo.id)}
+                          title={demo.description}
+                        >
+                          <span className="demo-name">{demo.name}</span>
+                          <span className="demo-description">{demo.description}</span>
+                        </button>
+                        <button
+                          className="demo-button-icon"
+                          title="Open in new window"
+                          onClick={() => openInNewWindow(demo.id)}
+                        >
+                          ↗
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="no-results">
+                <p>No packages found matching "{searchTerm}"</p>
+                <button onClick={() => setSearchTerm('')} className="demo-button">
+                  Clear Search
                 </button>
               </div>
-            ))}
+            )}
           </nav>
         </>
       )}
@@ -124,21 +184,39 @@ function App() {
       <main className="demo-container">
         {ActiveComponent ? (
           <div className="demo-wrapper">
-            {!isSoloMode && <h2>{demos.find(d => d.id === activeDemo)?.name}</h2>}
+            {!isSoloMode && (
+              <div className="demo-header">
+                <h2>{demos.find(d => d.id === activeDemo)?.name}</h2>
+                <p className="demo-subtitle">{demos.find(d => d.id === activeDemo)?.description}</p>
+              </div>
+            )}
             <ActiveComponent />
           </div>
         ) : (
           !isSoloMode && (
             <div className="welcome">
-              <h2>Welcome!</h2>
-              <p>Click on any package above to see a live demonstration</p>
-              <div className="package-list">
-                <h3>Available Packages:</h3>
-                <ul>
-                  {demos.map(demo => (
-                    <li key={demo.id}>{demo.name} <a href={`?demo=${demo.id}&solo=1`} target="_blank" rel="noreferrer" style={{ marginLeft: 6 }}>open ↗</a></li>
-                  ))}
-                </ul>
+              <div className="welcome-content">
+                <h2>👋 Welcome to Package Demos!</h2>
+                <p>Explore interactive examples and usage patterns for all packages</p>
+                <div className="welcome-stats">
+                  <div className="stat-card">
+                    <div className="stat-number">{demos.length}</div>
+                    <div className="stat-label">Packages</div>
+                  </div>
+                  <div className="stat-card">
+                    <div className="stat-number">{Object.keys(demosByCategory).length}</div>
+                    <div className="stat-label">Categories</div>
+                  </div>
+                </div>
+                <div className="quick-start">
+                  <h3>Quick Start</h3>
+                  <ul>
+                    <li>🔍 Use the search bar to find packages by name or category</li>
+                    <li>📦 Click any package to see live examples and usage</li>
+                    <li>🔗 Click the ↗ icon to open a package in a new window</li>
+                    <li>💡 Each demo includes real-world use cases and code examples</li>
+                  </ul>
+                </div>
               </div>
             </div>
           )
