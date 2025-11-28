@@ -27,6 +27,9 @@ import DevUtilsDemo from './components/DevUtilsDemo'
 import CommitGenDemo from './components/CommitGenDemo'
 import ChangelogBuddyDemo from './components/ChangelogBuddyDemo'
 import SeoBoostDemo from './components/SeoBoostDemo'
+import AiMiniDemo from './components/AiMiniDemo'
+import NovaCssDemo from './components/NovaCssDemo'
+import ArchitectureChallenges from './components/ArchitectureChallenges'
 import './App.css'
 
 function App() {
@@ -66,6 +69,9 @@ function App() {
     { id: 'commit-gen', name: 'Commit Gen', component: CommitGenDemo, category: 'Development', description: 'Generate conventional commit messages' },
     { id: 'changelog-buddy', name: 'Changelog Buddy', component: ChangelogBuddyDemo, category: 'Development', description: 'Generate changelogs from commits' },
     { id: 'seo-boost', name: 'SEO Boost', component: SeoBoostDemo, category: 'SEO', description: 'Complete SEO optimization with meta tags, JSON-LD, and sitemaps' },
+    { id: 'ai-mini', name: 'AI Mini', component: AiMiniDemo, category: 'AI', description: 'Universal LLM Client for OpenAI, Gemini, Claude, Groq and more' },
+    { id: 'nova-css', name: 'Nova CSS', component: NovaCssDemo, category: 'CSS', description: 'Hybrid CSS framework with utility classes and glassmorphism design' },
+    { id: 'architecture-challenges', name: 'Architecture Challenges', component: ArchitectureChallenges, category: 'Architecture', description: 'One-page map of recurring full-stack problems and solutions' },
     { id: 'downloads', name: 'NPM Downloads', component: DownloadsStats, category: 'Stats', description: 'View NPM download statistics' },
   ]
 

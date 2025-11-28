@@ -449,6 +449,50 @@
   font-weight: 600;
 }
 
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 15px;
+}
+
+.challenge-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.challenge-problem,
+.challenge-solution {
+  background: #f9f9ff;
+  border-radius: 10px;
+  padding: 12px;
+  border-left: 4px solid #667eea;
+}
+
+.challenge-solution {
+  background: #f7fdf9;
+  border-left-color: #28a745;
+}
+
+.challenge-card .label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #667eea;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.challenge-solution .label {
+  color: #28a745;
+}
+
 .examples-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
