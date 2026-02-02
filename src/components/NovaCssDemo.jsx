@@ -282,8 +282,3 @@ import '@upendra.manike/nova-css/dist/nova.css'
 }
 
 export default NovaCssDemo
-
-
-
-
-
